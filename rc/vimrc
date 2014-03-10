@@ -1,0 +1,330 @@
+" This vimrc automatically installs everything it needs.
+" To install, or reinstall, remove ~/.vim directory and open Vim.
+
+set nocompatible
+filetype off
+
+let needsToInstallBundles=0
+if !isdirectory(expand("~/.vim/bundle/vundle"))
+  echo "\nInstalling Vim dependencies... Please be patient!\n"
+  silent !mkdir -p ~/.vim/tmp
+  silent !mkdir -p ~/.vim/swap
+  silent !mkdir -p ~/.vim/undo
+  silent !mkdir -p ~/.vim/bundle
+  silent !mkfifo ~/.vim/commands-fifo
+  silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+  let needsToInstallBundles=1
+endif
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" Do these first, because other plugins depend on them
+Bundle 'gmarik/vundle'
+Bundle 'Syntastic'
+Bundle 'tpope/vim-fugitive'
+
+" Colorschemes
+Bundle 'wgibbs/vim-irblack'
+Bundle 'vim-scripts/tir_black'
+Bundle 'nanotech/jellybeans.vim'
+Bundle 'scrooloose/nerdtree'
+Bundle 'tpope/vim-vividchalk'
+Bundle 'chriskempson/base16-vim'
+Bundle 'noahfrederick/vim-hemisu'
+
+" Syntax & Language Support
+Bundle 'hail2u/vim-css3-syntax'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'nono/vim-handlebars'
+Bundle 'othree/html5-syntax.vim'
+Bundle 'slim-template/vim-slim'
+Bundle 'tpope/vim-markdown'
+Bundle 'tpope/vim-cucumber'
+Bundle 'vim-ruby/vim-ruby'
+Bundle 'vim-scripts/VimClojure'
+
+" Other
+Bundle 'csexton/trailertrash.vim'
+Bundle 'edsono/vim-matchit'
+Bundle 'godlygeek/tabular'
+Bundle 'kana/vim-textobj-user'
+Bundle 'kien/ctrlp.vim'
+Bundle 'mileszs/ack.vim'
+Bundle 'nelstrom/vim-textobj-rubyblock'
+Bundle 'nelstrom/vim-visual-star-search'
+Bundle 'nelstrom/vim-americanize'
+Bundle 'tomtom/tcomment_vim'
+Bundle 'tpope/vim-abolish'
+Bundle 'tpope/vim-bundler'
+Bundle 'tpope/vim-rails'
+Bundle 'tpope/vim-sensible'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-unimpaired'
+Bundle 'vim-scripts/bufexplorer.zip'
+Bundle 'vim-scripts/netrw.vim'
+Bundle 'michaeljsmith/vim-indent-object'
+Bundle 'thoughtbot/vim-rspec'
+" Bundle 'Lokaltog/vim-powerline'
+Bundle 'bling/vim-airline'
+Bundle 'jgdavey/tslime.vim'
+
+if needsToInstallBundles == 1
+  echo "\nInstalling Bundles, please ignore key map error messages\n"
+  :BundleInstall!
+  echo "\nInstalled.\n"
+endif
+
+filetype plugin indent on
+
+" ==========================
+" SETTINGS
+" ==========================
+
+if has("gui_macvim")
+  set antialias                      " Pretty
+  set guioptions=Ace                 " No menubar, toolbar or scrollbars, as minimal as possible
+  set guifont=Dejavu\ Sans\ Mono:h18
+  set background=dark
+  colorscheme ir_black              " This changes all the time.
+  set fuoptions=maxvert,maxhorz      " Fixes Full Screen on OSX
+  if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+  endif
+else
+  set antialias                      " Pretty
+  set background=dark
+  colorscheme tir_black               " This changes all the time.
+  " If you are on OSX Lion, and you hate Lion's native full screen, turn it off for macvim:
+  "   defaults write org.vim.MacVim MMNativeFullScreen 0
+  " Press Ctrl+Cmd+F to go full screen
+end
+
+" powerline symbols
+let g:airline_left_sep = '⮀'
+let g:airline_left_alt_sep = '⮁'
+let g:airline_right_sep = '⮂'
+let g:airline_right_alt_sep = '⮃'
+
+let g:airline_powerline_fonts = 0
+let g:airline#extensions#tabline#enabled = 1
+
+
+set vb t_vb=               " Turn off beep
+set lazyredraw             " Don't redraw during macro execution
+set synmaxcol=2048         " Stop syntax highlighting for long lines
+set number
+set nowrap                 " No wrapping by default
+set scrolloff=4            " Keep a few lines above and below current line
+set equalalways            " create equally sized splits
+set splitbelow splitright  " split placement
+set wildmode=longest,list  " Makes completion in command mode like bash
+set history=10000          " Keep a lot of stuff in history
+set backup                 " Make backups
+set backupdir=~/.vim/tmp/  " Keep backups in a central location
+set directory=~/.vim/swap/ " Keep swap files in a central location
+set undofile               " Keep undo history even after closing Vim
+set undodir=~/.vim/undo    " Where to store undo history
+set timeoutlen=500         " Don't wait so long for ambiguous leader keys
+set noesckeys              " Get rid of the delay when hitting esc!
+set gdefault               " assume the /g flag on :s substitutions to replace all matches in a line
+set colorcolumn=80
+
+" Indenting always 2 spaces, sorry Python
+set cindent
+set expandtab
+set shiftwidth=2
+set smartindent
+set softtabstop=2
+set tabstop=2
+
+" Search
+set smartcase
+set hlsearch
+
+let ruby_no_expensive = 1 " Differentiate between do..end and class..end is slow
+let ruby_operators = 1    " Highlight Ruby operators
+
+let g:netrw_list_hide  = "\.git,\.DS_Store"
+let g:netrw_banner     = 0
+let g:netrw_localrmdir='rm -r'
+
+let g:Powerline_symbols = 'fancy' " Use fancy symbols in vim-powerline
+
+set formatprg=par\ -w80\ -q
+
+if exists(':Americanize')
+  :Americanize
+endif
+
+
+" ==========================
+" AUTOCOMMANDS
+" ==========================
+
+" When editing a file, always jump to the last known cursor position.
+autocmd BufReadPost *
+      \ if line("'\"") > 1 && line("'\"") <= line("$") |
+      \   exe "normal! g`\"" |
+      \ endif
+
+" Format xml files
+au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
+
+
+
+
+" ==========================
+" GENERAL KEY MAPPINGS
+" ==========================
+
+" Rename :W to :w
+command! W :w
+
+" Use OSX pbpaste/pbcopy for F1/F2, for use in terminal
+nmap <F1> :set paste<cr>:r !pbpaste<cr>:set nopaste<cr>
+imap <F1> <Esc>:set paste<cr>:r !pbpaste<cr>:set nopaste<cr>
+nmap <F2> :.w !pbcopy<cr><cr>
+vmap <F2> :w !pbcopy<cr><cr>
+
+" in insert mode, jj goes to normal mode
+" if you ever need to type jj for real, type it slowly, like on old school mobile phones
+inoremap jj <ESC>
+
+" Directly switch between open splitted windows
+map <C-J> <C-W>j
+map <C-H> <C-W>h
+map <C-L> <C-W>l
+map <C-K> <C-W>k
+
+map <UP> ""
+map <DOWN> ""
+map <LEFT> ""
+map <RIGHT> ""
+
+" pressing j or k in a long wrapped will put cursor down/up one visual line
+nnoremap j gj
+nnoremap k gk
+
+" Shift+K becomes similar to Shift+J
+nnoremap <S-k> kJ
+
+" Remap return to clear search highlight
+nnoremap <cr> :nohlsearch<cr>
+
+" In normal mode, space will start command mode.
+nnoremap <space> :
+
+" Buffer Explorer opens with Ctrl+B
+nnoremap <C-B> :BufExplorer<cr>
+
+" %% will become the directory of the current file
+cnoremap %% <C-R>=expand('%:h').'/'<cr>
+
+" Hooks up smart tab autocomplete behavior mentioned above
+inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+inoremap <s-tab> <c-n>
+
+" Aligns tables in Cucumber
+inoremap <silent> <Bar>   <Bar><Esc>:call <SID>AlignCucumberTables()<cr>a
+
+" A common typo is ":E" when actually meaning ":e" and not ":Explore" or
+" ":Errors".
+cnoreabbrev E e
+cnoreabbrev W w
+cnoreabbrev Q q
+cnoreabbrev WQ wq
+cnoreabbrev Wq wq
+
+" ==========================
+" LEADER KEYS
+" ==========================
+
+let mapleader = ","
+
+" Map ,e and ,v to open files in the same directory as the current file
+map <leader>e :edit %%
+map <leader>v :view %%
+map <leader>m :vsplit %%
+map <leader>n :split %%
+
+let g:rspec_command_launcher = "iterm"
+let g:rspec_command = 'call Send_to_Tmux("zeus rspec {spec}\n")'
+
+" Rspec.vim mappings
+map <Leader>t :call RunCurrentSpecFile()<cr>
+map <Leader>T :call RunNearestSpec()<cr>
+map <Leader>l :call RunLastSpec()<cr>
+map <Leader>r :call RunAllSpecs()<cr>
+
+" Custom functions
+map <leader>p :call PromoteToLet()<cr>
+
+" Align = signs
+nmap <Leader>a= :Tabularize /=<cr>
+vmap <Leader>a= :Tabularize /=<cr>gv
+" Align after colons
+nmap <Leader>a: :Tabularize /:\zs/l1<cr>
+vmap <Leader>a: :Tabularize /:\zs/l1<cr>gv
+" Align hashrockets
+nmap <Leader>a> :Tabularize /=><cr>
+vmap <Leader>a> :Tabularize /=><cr>gv
+" Align commas
+nmap <Leader>a, :Tabularize /,\zs/l1<cr>
+vmap <Leader>a, :Tabularize /,\zs/l1<cr>gv
+" Align words and fix indentation
+nmap <Leader>aw :Tabularize /\s\+\zs/l1<cr>=ip
+vmap <Leader>aw :Tabularize /\s\+\zs/l1<cr>gv=gv
+" Align comments
+nmap <Leader>ac :Tabularize /#<cr>
+" Align blocks
+nmap <Leader>a{ :Tabularize /{<cr>
+vmap <Leader>a{ :Tabularize /{<cr>gv
+vmap <Leader>a{ :Tabularize /{<cr>gv
+
+" Fugitive (Git)
+map <Leader><Leader>c :Gcommit<cr>
+map <Leader><Leader>b :GBlame<cr>
+map <Leader><Leader>s :Gstatus<cr>
+map <Leader><Leader>w :Gwrite<cr>
+map <Leader><Leader>p :Git push<cr>
+map <Leader><Leader>f :Git fetch<cr>
+map <Leader><Leader>u :Git up<cr>
+
+" Open notes file
+map <Leader>q :split ~/Dropbox/notes.md<cr>
+
+" ==========================
+" FUNCTIONS
+" ==========================
+
+" Smart tab autocomplete behavior
+function! InsertTabWrapper()
+  let col = col('.') - 1
+  if !col || getline('.')[col - 1] !~ '\k'
+    return "\<tab>"
+  else
+    return "\<c-p>"
+  endif
+endfunction
+
+" Convert local variable to RSpec let block
+function! PromoteToLet()
+  :normal! dd
+  :exec '?^\s*it\>'
+  :normal! P
+  :.s/\(\w\+\) = \(.*\)$/let(:\1) { \2 }/
+  :normal ==
+endfunction
+
+" Aligns tables in cucumber
+function! s:AlignCucumberTables()
+  let p = '^\s*|\s.*\s|\s*$'
+  if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
+    let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
+    let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
+    Tabularize/|/l1
+    normal! 0
+    call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
+  endif
+endfunction

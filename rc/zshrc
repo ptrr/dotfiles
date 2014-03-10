@@ -1,0 +1,45 @@
+source ~/.dotfiles/config/local.zsh
+source ~/.dotfiles/config/tab_title.zsh
+source ~/.dotfiles/config/git_autocomplete.zsh
+source ~/.dotfiles/config/global.sh
+
+# Define the directories you store your projects in in
+#   ~/.dotfiles/script/personal.zsh
+#
+# PROJECT_PARENT_DIRS+=("$HOME/Projects")
+
+PROJECT_PARENT_DIRS=()
+
+if [[ -f ~/.dotfiles/config/personal.zsh ]]; then
+  source ~/.dotfiles/config/personal.zsh
+fi
+
+if [[ -f ~/.dotfiles/config/personal.sh ]]; then
+  source ~/.dotfiles/config/personal.sh
+fi
+
+for PARENT_DIR in ${PROJECT_PARENT_DIRS[@]} ; do
+  if [ -d "$PARENT_DIR" ]; then
+    for PROJECT_DIR in $(/bin/ls $PARENT_DIR); do
+      if [[ ! -z `which $PROJECT_DIR 2> /dev/null` ]]; then
+        if [ -d "$PARENT_DIR/$PROJECT_DIR" ]; then
+          alias "$PROJECT_DIR"="cd $PARENT_DIR/$PROJECT_DIR"
+        fi
+      fi
+    done
+  fi
+done
+
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+export CAMPFIRE_TOKEN='63ad1f7334a75d74b7e0b49a27375e661af88bfd'
+export DEPLOY_MESSAGE='http://img.springe.st/oie_3YU4IAdK43wM.gif' 
+
+export PATH="$HOME/Library/Haskell/bin:$PATH"
+
+alias zs='bundle exec zeus start'
+alias fs='bundle exec foreman start -f Zeusfile'
+alias be='bundle exec'
