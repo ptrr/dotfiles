@@ -23,31 +23,31 @@ TMUX_POWERLINE_DEFAULT_RIGHTSIDE_SEPARATOR=${TMUX_POWERLINE_DEFAULT_RIGHTSIDE_SE
 
 if [ -z $TMUX_POWERLINE_LEFT_STATUS_SEGMENTS ]; then
 	TMUX_POWERLINE_LEFT_STATUS_SEGMENTS=(
-		"tmux_session_info 4 0" \
-		"hostname 3 0" \
+		"tmux_session_info 4 233" \
+		"hostname 3 233" \
 		#"ifstat 30 255" \
 		#"ifstat_sys 30 255" \
-		"lan_ip 9 0 ${TMUX_POWERLINE_SEPARATOR_RIGHT_BOLD}" \
-		"wan_ip 2 0" \
+		"lan_ip 9 233 ${TMUX_POWERLINE_SEPARATOR_RIGHT_BOLD}" \
+		"wan_ip 2 233" \
 		"vcs_branch 29 88" \
-		"vcs_compare 60 255" \
-		"vcs_staged 64 255" \
-		"vcs_modified 9 255" \
-		"vcs_others 245 0" \
+		"vcs_compare 60 233" \
+		"vcs_staged 64 233" \
+		"vcs_modified 9 233" \
+		"vcs_others 245 233" \
 	)
 fi
 
 if [ -z $TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS ]; then
 	TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS=(
-		#"earthquake 3 0" \
-		"cpu 0 3 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
+		#"earthquake 3 233" \
+		"cpu 233 3 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
 		#"tmux_mem_cpu_load 234 136" \
-		"battery 0 2 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
-		#"rainbarf 0 0" \
+		"battery 233 2 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
+		#"rainbarf 233 0" \
 		#"xkb_layout 125 117" \
-		"date_day 0 4 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
-		"date 0 4 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
-		"time 0 4 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
-		#"utc_time 235 136 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
+		"date_day 233 4 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
+		"date 233 4 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
+		"time 233 4 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
+		#"utc_time 233 136 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}" \
 	)
 fi

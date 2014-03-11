@@ -94,7 +94,7 @@ if has("gui_macvim")
 else
   set antialias                      " Pretty
   set background=dark
-  colorscheme tir_black               " This changes all the time.
+  colorscheme vividchalk               " This changes all the time.
   " If you are on OSX Lion, and you hate Lion's native full screen, turn it off for macvim:
   "   defaults write org.vim.MacVim MMNativeFullScreen 0
   " Press Ctrl+Cmd+F to go full screen
