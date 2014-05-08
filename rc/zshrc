@@ -43,3 +43,5 @@ export PATH="$HOME/Library/Haskell/bin:$PATH"
 alias zs='bundle exec zeus start'
 alias fs='bundle exec foreman start -f Zeusfile'
 alias be='bundle exec'
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"

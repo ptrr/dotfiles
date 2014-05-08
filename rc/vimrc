@@ -36,13 +36,10 @@ Bundle 'noahfrederick/vim-hemisu'
 " Syntax & Language Support
 Bundle 'hail2u/vim-css3-syntax'
 Bundle 'kchmck/vim-coffee-script'
-Bundle 'nono/vim-handlebars'
 Bundle 'othree/html5-syntax.vim'
 Bundle 'slim-template/vim-slim'
 Bundle 'tpope/vim-markdown'
-Bundle 'tpope/vim-cucumber'
 Bundle 'vim-ruby/vim-ruby'
-Bundle 'vim-scripts/VimClojure'
 
 " Other
 Bundle 'csexton/trailertrash.vim'
@@ -65,7 +62,6 @@ Bundle 'vim-scripts/bufexplorer.zip'
 Bundle 'vim-scripts/netrw.vim'
 Bundle 'michaeljsmith/vim-indent-object'
 Bundle 'thoughtbot/vim-rspec'
-" Bundle 'Lokaltog/vim-powerline'
 Bundle 'bling/vim-airline'
 Bundle 'jgdavey/tslime.vim'
 
@@ -94,7 +90,7 @@ if has("gui_macvim")
 else
   set antialias                      " Pretty
   set background=dark
-  colorscheme vividchalk               " This changes all the time.
+  colorscheme hemisu               " This changes all the time.
   " If you are on OSX Lion, and you hate Lion's native full screen, turn it off for macvim:
   "   defaults write org.vim.MacVim MMNativeFullScreen 0
   " Press Ctrl+Cmd+F to go full screen
@@ -142,6 +138,16 @@ set tabstop=2
 set smartcase
 set hlsearch
 
+" Show “invisible” characters
+set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
+
+" CtrlP settings
+let g:ctrlp_match_window = 'bottom,order:ttb'
+let g:ctrlp_switch_buffer = 0
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+
+
 let ruby_no_expensive = 1 " Differentiate between do..end and class..end is slow
 let ruby_operators = 1    " Highlight Ruby operators
 
@@ -151,11 +157,17 @@ let g:netrw_localrmdir='rm -r'
 
 let g:Powerline_symbols = 'fancy' " Use fancy symbols in vim-powerline
 
-set formatprg=par\ -w80\ -q
+" Strip trailing whitespace (,ss)
+function! StripWhitespace()
+  let save_cursor = getpos(".")
+  let old_query = getreg('/')
+  :%s/\s\+$//e
+  call setpos('.', save_cursor)
+  call setreg('/', old_query)
+endfunction
+noremap <leader>ss :call StripWhitespace()<CR>
 
-if exists(':Americanize')
-  :Americanize
-endif
+set formatprg=par\ -w80\ -q
 
 
 " ==========================
