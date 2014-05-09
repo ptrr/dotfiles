@@ -30,6 +30,11 @@ for PARENT_DIR in ${PROJECT_PARENT_DIRS[@]} ; do
   fi
 done
 
+# Base16 Shell
+BASE16_SCHEME="3024"
+BASE16_SHELL="$HOME/.dotfiles/base16-shell/base16-$BASE16_SCHEME.dark.sh"
+[[ -s $BASE16_SHELL ]] && . $BASE16_SHELL
+
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 

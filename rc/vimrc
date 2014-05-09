@@ -90,11 +90,13 @@ if has("gui_macvim")
 else
   set antialias                      " Pretty
   set background=dark
-  colorscheme hemisu               " This changes all the time.
+  colorscheme base16-3024 " This changes all the time.
   " If you are on OSX Lion, and you hate Lion's native full screen, turn it off for macvim:
   "   defaults write org.vim.MacVim MMNativeFullScreen 0
   " Press Ctrl+Cmd+F to go full screen
 end
+
+let base16colorspace=256  " Access colors present in 256 colorspace
 
 " powerline symbols
 let g:airline_left_sep = '⮀'
