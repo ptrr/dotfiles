@@ -168,7 +168,7 @@ function merge {
 function subdir {
   space
   append $cyan
-  append "/${subdir%/}"
+  append "☢ /${subdir%/}"
 }
 
 finish

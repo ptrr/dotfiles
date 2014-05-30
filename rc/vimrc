@@ -21,48 +21,37 @@ call vundle#rc()
 
 " Do these first, because other plugins depend on them
 Bundle 'gmarik/vundle'
-Bundle 'Syntastic'
+" Bundle 'Syntastic'
 Bundle 'tpope/vim-fugitive'
 
-" Colorschemes
+" " Colorschemes
 Bundle 'wgibbs/vim-irblack'
 Bundle 'vim-scripts/tir_black'
-Bundle 'nanotech/jellybeans.vim'
-Bundle 'scrooloose/nerdtree'
-Bundle 'tpope/vim-vividchalk'
-Bundle 'chriskempson/base16-vim'
-Bundle 'noahfrederick/vim-hemisu'
 
-" Syntax & Language Support
+" " Syntax & Language Support
 Bundle 'hail2u/vim-css3-syntax'
-Bundle 'kchmck/vim-coffee-script'
 Bundle 'othree/html5-syntax.vim'
 Bundle 'slim-template/vim-slim'
-Bundle 'tpope/vim-markdown'
-Bundle 'vim-ruby/vim-ruby'
+" Bundle 'vim-ruby/vim-ruby'
 
-" Other
+" " Other
+Bundle 'scrooloose/nerdtree'
 Bundle 'csexton/trailertrash.vim'
 Bundle 'edsono/vim-matchit'
 Bundle 'godlygeek/tabular'
 Bundle 'kana/vim-textobj-user'
-Bundle 'kien/ctrlp.vim'
 Bundle 'mileszs/ack.vim'
 Bundle 'nelstrom/vim-textobj-rubyblock'
-Bundle 'nelstrom/vim-visual-star-search'
-Bundle 'nelstrom/vim-americanize'
-Bundle 'tomtom/tcomment_vim'
-Bundle 'tpope/vim-abolish'
+" Bundle 'tomtom/tcomment_vim'
 Bundle 'tpope/vim-bundler'
 Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-sensible'
 Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-unimpaired'
 Bundle 'vim-scripts/bufexplorer.zip'
 Bundle 'vim-scripts/netrw.vim'
 Bundle 'michaeljsmith/vim-indent-object'
 Bundle 'thoughtbot/vim-rspec'
-Bundle 'bling/vim-airline'
+" Bundle 'bling/vim-airline'
 Bundle 'jgdavey/tslime.vim'
 
 if needsToInstallBundles == 1
@@ -89,14 +78,9 @@ if has("gui_macvim")
   endif
 else
   set antialias                      " Pretty
+  colorscheme tir_black
   set background=dark
-  colorscheme base16-3024 " This changes all the time.
-  " If you are on OSX Lion, and you hate Lion's native full screen, turn it off for macvim:
-  "   defaults write org.vim.MacVim MMNativeFullScreen 0
-  " Press Ctrl+Cmd+F to go full screen
 end
-
-let base16colorspace=256  " Access colors present in 256 colorspace
 
 " powerline symbols
 let g:airline_left_sep = '⮀'
@@ -107,6 +91,8 @@ let g:airline_right_alt_sep = '⮃'
 let g:airline_powerline_fonts = 0
 let g:airline#extensions#tabline#enabled = 1
 
+let g:molokai_original = 1
+let g:rehash256 = 1
 
 set vb t_vb=               " Turn off beep
 set lazyredraw             " Don't redraw during macro execution
@@ -147,7 +133,6 @@ set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
 let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 0
-let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
 
 let ruby_no_expensive = 1 " Differentiate between do..end and class..end is slow
@@ -159,15 +144,6 @@ let g:netrw_localrmdir='rm -r'
 
 let g:Powerline_symbols = 'fancy' " Use fancy symbols in vim-powerline
 
-" Strip trailing whitespace (,ss)
-function! StripWhitespace()
-  let save_cursor = getpos(".")
-  let old_query = getreg('/')
-  :%s/\s\+$//e
-  call setpos('.', save_cursor)
-  call setreg('/', old_query)
-endfunction
-noremap <leader>ss :call StripWhitespace()<CR>
 
 set formatprg=par\ -w80\ -q
 
@@ -274,27 +250,27 @@ map <Leader>r :call RunAllSpecs()<cr>
 " Custom functions
 map <leader>p :call PromoteToLet()<cr>
 
-" Align = signs
-nmap <Leader>a= :Tabularize /=<cr>
-vmap <Leader>a= :Tabularize /=<cr>gv
-" Align after colons
-nmap <Leader>a: :Tabularize /:\zs/l1<cr>
-vmap <Leader>a: :Tabularize /:\zs/l1<cr>gv
-" Align hashrockets
-nmap <Leader>a> :Tabularize /=><cr>
-vmap <Leader>a> :Tabularize /=><cr>gv
-" Align commas
-nmap <Leader>a, :Tabularize /,\zs/l1<cr>
-vmap <Leader>a, :Tabularize /,\zs/l1<cr>gv
-" Align words and fix indentation
-nmap <Leader>aw :Tabularize /\s\+\zs/l1<cr>=ip
-vmap <Leader>aw :Tabularize /\s\+\zs/l1<cr>gv=gv
-" Align comments
-nmap <Leader>ac :Tabularize /#<cr>
-" Align blocks
-nmap <Leader>a{ :Tabularize /{<cr>
-vmap <Leader>a{ :Tabularize /{<cr>gv
-vmap <Leader>a{ :Tabularize /{<cr>gv
+" " Align = signs
+" nmap <Leader>a= :Tabularize /=<cr>
+" vmap <Leader>a= :Tabularize /=<cr>gv
+" " Align after colons
+" nmap <Leader>a: :Tabularize /:\zs/l1<cr>
+" vmap <Leader>a: :Tabularize /:\zs/l1<cr>gv
+" " Align hashrockets
+" nmap <Leader>a> :Tabularize /=><cr>
+" vmap <Leader>a> :Tabularize /=><cr>gv
+" " Align commas
+" nmap <Leader>a, :Tabularize /,\zs/l1<cr>
+" vmap <Leader>a, :Tabularize /,\zs/l1<cr>gv
+" " Align words and fix indentation
+" nmap <Leader>aw :Tabularize /\s\+\zs/l1<cr>=ip
+" vmap <Leader>aw :Tabularize /\s\+\zs/l1<cr>gv=gv
+" " Align comments
+" nmap <Leader>ac :Tabularize /#<cr>
+" " Align blocks
+" nmap <Leader>a{ :Tabularize /{<cr>
+" vmap <Leader>a{ :Tabularize /{<cr>gv
+" vmap <Leader>a{ :Tabularize /{<cr>gv
 
 " Fugitive (Git)
 map <Leader><Leader>c :Gcommit<cr>
@@ -308,6 +284,15 @@ map <Leader><Leader>u :Git up<cr>
 " Open notes file
 map <Leader>q :split ~/Dropbox/notes.md<cr>
 
+" Strip trailing whitespace (,ss)
+function! StripWhitespace()
+  let save_cursor = getpos(".")
+  let old_query = getreg('/')
+  :%s/\s\+$//e
+  call setpos('.', save_cursor)
+  call setreg('/', old_query)
+endfunction
+noremap <leader>s :call StripWhitespace()<CR>
 " ==========================
 " FUNCTIONS
 " ==========================
