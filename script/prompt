@@ -51,7 +51,7 @@ function time_since_last_commit {
   minutes=$(minutes_since_last_commit)
   if [ "$minutes" -ne -1 ]; then
     space
-    append $gray
+    append $white
     if [ "$minutes" -ge 518400 ]; then
       append $(($minutes/518400))
       append y

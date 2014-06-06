@@ -27,6 +27,9 @@ Bundle 'tpope/vim-fugitive'
 " " Colorschemes
 Bundle 'wgibbs/vim-irblack'
 Bundle 'vim-scripts/tir_black'
+Bundle 'ptrr/phd-vim'
+Bundle 'jnurmine/Zenburn'
+Bundle 'jonathanfilip/vim-lucius'
 
 " " Syntax & Language Support
 Bundle 'hail2u/vim-css3-syntax'
@@ -53,6 +56,7 @@ Bundle 'michaeljsmith/vim-indent-object'
 Bundle 'thoughtbot/vim-rspec'
 " Bundle 'bling/vim-airline'
 Bundle 'jgdavey/tslime.vim'
+Bundle 'JuliaLang/julia-vim'
 
 if needsToInstallBundles == 1
   echo "\nInstalling Bundles, please ignore key map error messages\n"
@@ -71,14 +75,15 @@ if has("gui_macvim")
   set guioptions=Ace                 " No menubar, toolbar or scrollbars, as minimal as possible
   set guifont=Dejavu\ Sans\ Mono:h18
   set background=dark
-  colorscheme ir_black              " This changes all the time.
+  colorscheme zenburn              " This changes all the time.
   set fuoptions=maxvert,maxhorz      " Fixes Full Screen on OSX
   if !exists('g:airline_symbols')
     let g:airline_symbols = {}
   endif
 else
+  set t_Co=256
   set antialias                      " Pretty
-  colorscheme tir_black
+  colorscheme lucius
   set background=dark
 end
 
