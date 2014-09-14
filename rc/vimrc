@@ -2,7 +2,8 @@
 " To install, or reinstall, remove ~/.vim directory and open Vim.
 
 set nocompatible
-filetype off
+set re=1
+filetype on
 
 let needsToInstallBundles=0
 if !isdirectory(expand("~/.vim/bundle/vundle"))
@@ -21,42 +22,18 @@ call vundle#rc()
 
 " Do these first, because other plugins depend on them
 Bundle 'gmarik/vundle'
-" Bundle 'Syntastic'
-Bundle 'tpope/vim-fugitive'
-
-" " Colorschemes
 Bundle 'wgibbs/vim-irblack'
 Bundle 'vim-scripts/tir_black'
-Bundle 'ptrr/phd-vim'
-Bundle 'jnurmine/Zenburn'
-Bundle 'jonathanfilip/vim-lucius'
-
-" " Syntax & Language Support
-Bundle 'hail2u/vim-css3-syntax'
-Bundle 'othree/html5-syntax.vim'
+Bundle 'tpope/vim-vividchalk'
 Bundle 'slim-template/vim-slim'
-" Bundle 'vim-ruby/vim-ruby'
-
-" " Other
 Bundle 'scrooloose/nerdtree'
-Bundle 'csexton/trailertrash.vim'
-Bundle 'edsono/vim-matchit'
-Bundle 'godlygeek/tabular'
-Bundle 'kana/vim-textobj-user'
 Bundle 'mileszs/ack.vim'
-Bundle 'nelstrom/vim-textobj-rubyblock'
-" Bundle 'tomtom/tcomment_vim'
-Bundle 'tpope/vim-bundler'
-Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-sensible'
 Bundle 'tpope/vim-surround'
-Bundle 'vim-scripts/bufexplorer.zip'
-Bundle 'vim-scripts/netrw.vim'
-Bundle 'michaeljsmith/vim-indent-object'
-Bundle 'thoughtbot/vim-rspec'
-" Bundle 'bling/vim-airline'
-Bundle 'jgdavey/tslime.vim'
 Bundle 'JuliaLang/julia-vim'
+Bundle 'kikijump/tslime.vim'
+Bundle 'tomasr/molokai'
+Bundle 'wting/rust.vim'
 
 if needsToInstallBundles == 1
   echo "\nInstalling Bundles, please ignore key map error messages\n"
@@ -70,22 +47,10 @@ filetype plugin indent on
 " SETTINGS
 " ==========================
 
-if has("gui_macvim")
-  set antialias                      " Pretty
-  set guioptions=Ace                 " No menubar, toolbar or scrollbars, as minimal as possible
-  set guifont=Dejavu\ Sans\ Mono:h18
-  set background=dark
-  colorscheme zenburn              " This changes all the time.
-  set fuoptions=maxvert,maxhorz      " Fixes Full Screen on OSX
-  if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-  endif
-else
-  set t_Co=256
-  set antialias                      " Pretty
-  colorscheme lucius
-  set background=dark
-end
+set t_Co=256
+" set antialias                      " Pretty
+colorscheme vividchalk
+set background=dark
 
 " powerline symbols
 let g:airline_left_sep = '⮀'
@@ -109,7 +74,7 @@ set equalalways            " create equally sized splits
 set splitbelow splitright  " split placement
 set wildmode=longest,list  " Makes completion in command mode like bash
 set history=10000          " Keep a lot of stuff in history
-set backup                 " Make backups
+set nobackup               " Make backups
 set backupdir=~/.vim/tmp/  " Keep backups in a central location
 set directory=~/.vim/swap/ " Keep swap files in a central location
 set undofile               " Keep undo history even after closing Vim
@@ -139,16 +104,12 @@ let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 0
 
-
 let ruby_no_expensive = 1 " Differentiate between do..end and class..end is slow
 let ruby_operators = 1    " Highlight Ruby operators
 
 let g:netrw_list_hide  = "\.git,\.DS_Store"
 let g:netrw_banner     = 0
 let g:netrw_localrmdir='rm -r'
-
-let g:Powerline_symbols = 'fancy' " Use fancy symbols in vim-powerline
-
 
 set formatprg=par\ -w80\ -q
 
@@ -255,27 +216,6 @@ map <Leader>r :call RunAllSpecs()<cr>
 " Custom functions
 map <leader>p :call PromoteToLet()<cr>
 
-" " Align = signs
-" nmap <Leader>a= :Tabularize /=<cr>
-" vmap <Leader>a= :Tabularize /=<cr>gv
-" " Align after colons
-" nmap <Leader>a: :Tabularize /:\zs/l1<cr>
-" vmap <Leader>a: :Tabularize /:\zs/l1<cr>gv
-" " Align hashrockets
-" nmap <Leader>a> :Tabularize /=><cr>
-" vmap <Leader>a> :Tabularize /=><cr>gv
-" " Align commas
-" nmap <Leader>a, :Tabularize /,\zs/l1<cr>
-" vmap <Leader>a, :Tabularize /,\zs/l1<cr>gv
-" " Align words and fix indentation
-" nmap <Leader>aw :Tabularize /\s\+\zs/l1<cr>=ip
-" vmap <Leader>aw :Tabularize /\s\+\zs/l1<cr>gv=gv
-" " Align comments
-" nmap <Leader>ac :Tabularize /#<cr>
-" " Align blocks
-" nmap <Leader>a{ :Tabularize /{<cr>
-" vmap <Leader>a{ :Tabularize /{<cr>gv
-" vmap <Leader>a{ :Tabularize /{<cr>gv
 
 " Fugitive (Git)
 map <Leader><Leader>c :Gcommit<cr>
@@ -332,3 +272,25 @@ function! s:AlignCucumberTables()
     call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
   endif
 endfunction
+
+nnoremap <C-p> :Unite file_rec/async<cr>
+nnoremap <silent> ,g :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
+if executable('pt')
+  let g:unite_source_grep_command = 'pt'
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor'
+  let g:unite_source_grep_recursive_opt = ''
+  let g:unite_source_grep_encoding = 'utf-8'
+endif
+
+func! WordProcessorMode() 
+  setlocal formatoptions=1 
+  setlocal noexpandtab 
+  setlocal spell spelllang=en_uk
+  set thesaurus+=/Users/sbrown/.vim/thesaurus/mthesaur.txt
+  set complete+=s
+  set formatprg=par
+  setlocal wrap 
+  setlocal linebreak 
+  setlocal columns=86
+endfu 
+com! WP call WordProcessorMode()
