@@ -22,18 +22,18 @@ call vundle#rc()
 
 " Do these first, because other plugins depend on them
 Bundle 'gmarik/vundle'
+Bundle 'wincent/Command-T'
 Bundle 'wgibbs/vim-irblack'
 Bundle 'vim-scripts/tir_black'
 Bundle 'tpope/vim-vividchalk'
 Bundle 'slim-template/vim-slim'
-Bundle 'scrooloose/nerdtree'
 Bundle 'mileszs/ack.vim'
 Bundle 'tpope/vim-sensible'
 Bundle 'tpope/vim-surround'
 Bundle 'JuliaLang/julia-vim'
 Bundle 'kikijump/tslime.vim'
-Bundle 'tomasr/molokai'
 Bundle 'wting/rust.vim'
+Bundle 'altercation/vim-colors-solarized'
 
 if needsToInstallBundles == 1
   echo "\nInstalling Bundles, please ignore key map error messages\n"
@@ -48,9 +48,9 @@ filetype plugin indent on
 " ==========================
 
 set t_Co=256
-" set antialias                      " Pretty
-colorscheme vividchalk
-set background=dark
+let g:solarized_termcolors=256
+colorscheme solarized
+set background=light
 
 " powerline symbols
 let g:airline_left_sep = '⮀'
@@ -198,6 +198,10 @@ cnoreabbrev Wq wq
 
 let mapleader = ","
 
+" Map CmdT
+nnoremap <silent> <Leader>t :CommandT<CR>
+nnoremap <silent> <Leader>b :CommandTBuffer<CR>
+
 " Map ,e and ,v to open files in the same directory as the current file
 map <leader>e :edit %%
 map <leader>v :view %%
@@ -208,10 +212,10 @@ let g:rspec_command_launcher = "iterm"
 let g:rspec_command = 'call Send_to_Tmux("zeus rspec {spec}\n")'
 
 " Rspec.vim mappings
-map <Leader>t :call RunCurrentSpecFile()<cr>
-map <Leader>T :call RunNearestSpec()<cr>
-map <Leader>l :call RunLastSpec()<cr>
-map <Leader>r :call RunAllSpecs()<cr>
+" map <Leader>t :call RunCurrentSpecFile()<cr>
+" map <Leader>T :call RunNearestSpec()<cr>
+" map <Leader>l :call RunLastSpec()<cr>
+" map <Leader>r :call RunAllSpecs()<cr>
 
 " Custom functions
 map <leader>p :call PromoteToLet()<cr>
@@ -285,7 +289,7 @@ endif
 func! WordProcessorMode() 
   setlocal formatoptions=1 
   setlocal noexpandtab 
-  setlocal spell spelllang=en_uk
+  setlocal spell spelllang=en_us
   set thesaurus+=/Users/sbrown/.vim/thesaurus/mthesaur.txt
   set complete+=s
   set formatprg=par

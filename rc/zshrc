@@ -41,10 +41,12 @@ export CAMPFIRE_TOKEN='63ad1f7334a75d74b7e0b49a27375e661af88bfd'
 export DEPLOY_MESSAGE='http://img.springe.st/oie_3YU4IAdK43wM.gif' 
 
 export PATH="$HOME/Library/Haskell/bin:$PATH"
+export PATH=~/anaconda/bin:$PATH
 
 alias zs='bundle exec zeus start'
 alias fs='bundle exec foreman start -f Zeusfile'
 alias be='bundle exec'
 alias dot='~/.dotfiles'
 alias java='/Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/bin/java'
+
 

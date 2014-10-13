@@ -15,6 +15,8 @@ export RUBY_GC_MALLOC_LIMIT=110000000
 export RUBY_HEAP_FREE_MIN=20000
 export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
 
+export LT_HOMEA='/Applications'
+
 # Paths
 export PATH="/usr/local/bin:$PATH"
 if [[ -d "$HOME/.rvm/bin" ]]; then
