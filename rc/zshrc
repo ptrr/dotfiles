@@ -40,8 +40,10 @@ export PATH="/usr/local/heroku/bin:$PATH"
 export CAMPFIRE_TOKEN='63ad1f7334a75d74b7e0b49a27375e661af88bfd'
 export DEPLOY_MESSAGE='http://img.springe.st/oie_3YU4IAdK43wM.gif' 
 
+
 export PATH="$HOME/Library/Haskell/bin:$PATH"
 export PATH=~/anaconda/bin:$PATH
+export PATH="$PATH:/usr/local/smlnj-110.77/bin"
 
 alias zs='bundle exec zeus start'
 alias fs='bundle exec foreman start -f Zeusfile'
@@ -49,4 +51,8 @@ alias be='bundle exec'
 alias dot='~/.dotfiles'
 alias java='/Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/bin/java'
 
+alias sml='rlwrap sml'
+
+alias hibernateon="sudo pmset -a hibernatemode 3"
+alias hibernateoff="sudo pmset -a hibernatemode 0"
 
