@@ -3,7 +3,8 @@
 
 set nocompatible
 set re=1
-filetype on
+syntax on
+filetype off
 
 let needsToInstallBundles=0
 if !isdirectory(expand("~/.vim/bundle/vundle"))
@@ -23,17 +24,22 @@ call vundle#rc()
 " Do these first, because other plugins depend on them
 Bundle 'gmarik/vundle'
 Bundle 'wincent/Command-T'
+Bundle 'scrooloose/nerdtree'
 Bundle 'slim-template/vim-slim'
 Bundle 'mileszs/ack.vim'
+Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-sensible'
 Bundle 'tpope/vim-surround'
 Bundle 'JuliaLang/julia-vim'
+Bundle 'rust-lang/rust.vim'
 Bundle 'kikijump/tslime.vim'
-Bundle 'wting/rust.vim'
 Bundle 'bling/vim-airline'
 Bundle 'gkz/vim-ls'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'mustache/vim-mustache-handlebars'
 
 " Colours
+Bundle 'quanganhdo/grb256'
 Bundle 'wgibbs/vim-irblack'
 Bundle 'vim-scripts/tir_black'
 Bundle 'tpope/vim-vividchalk'
@@ -41,6 +47,8 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'jonathanfilip/vim-lucius'
 Bundle 'freeo/vim-kalisi'
 Bundle 'w0ng/vim-hybrid'
+Bundle 'morhetz/gruvbox'
+Bundle 'ryanss/vim-hackernews'
 
 if needsToInstallBundles == 1
   echo "\nInstalling Bundles, please ignore key map error messages\n"
@@ -55,16 +63,17 @@ filetype plugin indent on
 " ==========================
 
 set t_Co=256
-colorscheme hybrid
+" colorscheme tir_black
+colorscheme solarized
 set background=dark
 
 " powerline symbols
-let g:airline_left_sep = '⮀'
-let g:airline_left_alt_sep = '⮁'
-let g:airline_right_sep = '⮂'
-let g:airline_right_alt_sep = '⮃'
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
 
-let g:airline_theme = 'badwolf'
+let g:airline_theme = 'solarized'
 
 let g:airline_powerline_fonts = 0
 let g:airline#extensions#tabline#enabled = 1
@@ -135,8 +144,9 @@ autocmd BufReadPost *
 " Format xml files
 au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
 
-
-
+au BufNewFile,BufRead *.rs set filetype=rust
+au BufNewFile,BufRead *.slim set filetype=slim
+au BufNewFile,BufRead *.coffee set filetype=coffeescript
 
 " ==========================
 " GENERAL KEY MAPPINGS

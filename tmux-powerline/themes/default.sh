@@ -1,10 +1,10 @@
 # Default Theme
 
 if patched_font_in_use; then
-	TMUX_POWERLINE_SEPARATOR_LEFT_BOLD="⮂"
-	TMUX_POWERLINE_SEPARATOR_LEFT_THIN="⮃"
-	TMUX_POWERLINE_SEPARATOR_RIGHT_BOLD="⮀"
-	TMUX_POWERLINE_SEPARATOR_RIGHT_THIN="⮁"
+	TMUX_POWERLINE_SEPARATOR_LEFT_BOLD=""
+	TMUX_POWERLINE_SEPARATOR_LEFT_THIN=""
+	TMUX_POWERLINE_SEPARATOR_RIGHT_BOLD=""
+	TMUX_POWERLINE_SEPARATOR_RIGHT_THIN=""
 else
 	TMUX_POWERLINE_SEPARATOR_LEFT_BOLD="◀"
 	TMUX_POWERLINE_SEPARATOR_LEFT_THIN="❮"
@@ -23,14 +23,15 @@ TMUX_POWERLINE_DEFAULT_RIGHTSIDE_SEPARATOR=${TMUX_POWERLINE_DEFAULT_RIGHTSIDE_SE
 
 if [ -z $TMUX_POWERLINE_LEFT_STATUS_SEGMENTS ]; then
 	TMUX_POWERLINE_LEFT_STATUS_SEGMENTS=(
-		"tmux_session_info 0 5" \
-		"hostname 0 14" \
+		"tmux_session_info 0 5 ${TMUX_POWERLINE_SEPARATOR_RIGHT_THIN}" \
 		#"ifstat 30 255" \
+		#"tmux_session_info 0 5" \
+		"hostname 0 11" \
 		#"ifstat_sys 30 255" \
 		#"lan_ip 9 233 ${TMUX_POWERLINE_SEPARATOR_RIGHT_BOLD}" \
 		#"wan_ip 2 233" \
 		"vcs_branch 0 10 " \
-		"vcs_compare 233 0" \
+		"vcs_compare 0 4" \
 		"vcs_staged 0 2" \
 		"vcs_modified 0 3" \
 		"vcs_others 0 5" \

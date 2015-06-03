@@ -9,12 +9,6 @@ export SVN_EDITOR=$EDITOR
 export BUNDLER_EDITOR=$EDITOR
 export GEMEDITOR=$EDITOR
 
-# Ruby Optimalizations
-export RUBY_HEAP_MIN_SLOTS=1100000
-export RUBY_GC_MALLOC_LIMIT=110000000
-export RUBY_HEAP_FREE_MIN=20000
-export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
-
 export LT_HOMEA='/Applications'
 
 # Paths
