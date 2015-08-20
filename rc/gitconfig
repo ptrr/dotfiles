@@ -53,7 +53,7 @@
   helper = osxkeychain
 [user]
 	name = Peter de Ruijter
-	email = peter@l2code.nl
+	email = hello@thisiswho.im
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f

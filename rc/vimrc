@@ -2,7 +2,7 @@
 " To install, or reinstall, remove ~/.vim directory and open Vim.
 
 set nocompatible
-set re=1
+" set re=1
 syntax on
 filetype off
 
@@ -25,18 +25,20 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'wincent/Command-T'
 Bundle 'scrooloose/nerdtree'
-Bundle 'slim-template/vim-slim'
+" Bundle 'slim-template/vim-slim'
 Bundle 'mileszs/ack.vim'
-Bundle 'tpope/vim-rails'
+" Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-sensible'
 Bundle 'tpope/vim-surround'
-Bundle 'JuliaLang/julia-vim'
+" Bundle 'JuliaLang/julia-vim'
 Bundle 'rust-lang/rust.vim'
 Bundle 'kikijump/tslime.vim'
-Bundle 'bling/vim-airline'
+" Bundle 'bling/vim-airline'
 Bundle 'gkz/vim-ls'
-Bundle 'kchmck/vim-coffee-script'
+" Bundle 'kchmck/vim-coffee-script'
 Bundle 'mustache/vim-mustache-handlebars'
+Bundle 'tpope/vim-fugitive'
+Bundle 'itchyny/lightline.vim'
 
 " Colours
 Bundle 'quanganhdo/grb256'
@@ -49,6 +51,7 @@ Bundle 'freeo/vim-kalisi'
 Bundle 'w0ng/vim-hybrid'
 Bundle 'morhetz/gruvbox'
 Bundle 'ryanss/vim-hackernews'
+Bundle 'whatyouhide/vim-gotham'
 
 if needsToInstallBundles == 1
   echo "\nInstalling Bundles, please ignore key map error messages\n"
@@ -63,9 +66,9 @@ filetype plugin indent on
 " ==========================
 
 set t_Co=256
-" colorscheme tir_black
-colorscheme solarized
+colorscheme gruvbox
 set background=dark
+" let g:solarized_termcolors=256
 
 " powerline symbols
 let g:airline_left_sep = ''
@@ -73,13 +76,14 @@ let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
 
-let g:airline_theme = 'solarized'
+let g:airline_theme = 'badwolf'
 
 let g:airline_powerline_fonts = 0
 let g:airline#extensions#tabline#enabled = 1
 
 let g:molokai_original = 1
 let g:rehash256 = 1
+
 
 set vb t_vb=               " Turn off beep
 set lazyredraw             " Don't redraw during macro execution
