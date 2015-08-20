@@ -48,4 +48,3 @@ alias dc='docker-compose'
 
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
-eval "$(boot2docker shellinit)"
