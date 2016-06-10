@@ -9,6 +9,8 @@ source ~/.dotfiles/config/global.sh
 # PROJECT_PARENT_DIRS+=("$HOME/Projects")
 
 PROJECT_PARENT_DIRS=()
+PROJECT_PARENT_DIRS+=("$HOME/Projects")
+
 
 if [[ -f ~/.dotfiles/config/personal.zsh ]]; then
   source ~/.dotfiles/config/personal.zsh
@@ -33,11 +35,22 @@ done
 export PATH="/usr/local/heroku/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/share/npm/bin:$PATH"
+export EDITOR="nvim"
+
+alias dot='cd ~/.dotfiles'
 
 alias fs='bundle exec foreman start'
 alias be='bundle exec'
-alias dot='~/.dotfiles'
-alias sml='rlwrap sml'
+alias bers='be rails s'
+alias berk='be rake'
+alias besq='be sidekiq -C config/sidekiq.yml'
+alias s3='bers -p 4000'
+alias s4='bers -p 4000'
+alias snfr='bers -p 5000'
+alias s88='bers -p 8080'
+
+alias v='/usr/bin/vim'
+alias vim='nvim'
 
 alias hibernateon="sudo pmset -a hibernatemode 3"
 alias hibernateoff="sudo pmset -a hibernatemode 0"
@@ -45,6 +58,7 @@ alias hibernateoff="sudo pmset -a hibernatemode 0"
 # alias vim='/Applications/mvim -v'
 alias todo='$EDITOR ~/.todo' 
 alias dc='docker-compose'
+alias hark='be rake'
 
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"

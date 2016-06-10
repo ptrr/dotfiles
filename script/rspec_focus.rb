@@ -3,5 +3,5 @@ RSpec.configure do |config|
   formatters = config.formatters
   formatters.singleton_class.send(:define_method, :<<) { |*| }
   config.singleton_class.send(:define_method, :formatters) { formatters }
-  # config.before(:suite) { system "clear" }
+  config.before(:suite) { system "clear" }
 end

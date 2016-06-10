@@ -22,4 +22,6 @@ for f in $mydir/rc/*; do
 
 done
 
+ln -fs "~/.dotfiles/config ~/.config"
+
 echo "Done."
