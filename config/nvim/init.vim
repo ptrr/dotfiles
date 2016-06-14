@@ -35,8 +35,10 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-sensible'
 Bundle 'tpope/vim-surround'
 Bundle 'vim-scripts/tir_black'
-Bundle 'frankier/neovim-colors-solarized-truecolor-only'
-Bundle 'morhetz/gruvbox'
+Bundle 'nanotech/jellybeans.vim'
+Bundle 'Yggdroot/indentLine'
+Bundle 'vim-airline/vim-airline'
+Bundle 'vim-airline/vim-airline-themes'
 
 if needsToInstallBundles == 1
   echo "\nInstalling Bundles, please ignore key map error messages\n"
@@ -52,24 +54,6 @@ filetype plugin indent on
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 colorscheme jellybeans
 set background=dark
-
-let g:lucius_style = 'black'
-let g:lucius_contrast = 'low'
-
-" The Silver Searcher
-if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-endif
-
-let g:enable_bold_font = 1
-let g:rehash256 = 1
 
 set vb t_vb=               " Turn off beep
 set lazyredraw             " Don't redraw during macro execution
@@ -115,7 +99,7 @@ command! Ttrb :T env PARTIAL=false TRUNCATE=true COUNTRIES=nl bundle exec rails 
 nnoremap <silent> ,th :Ttrb<cr>
 
 " Show “invisible” characters
-set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
+set listchars=tab:▸\ ,trail:·,eol:¬,nbsp:_
 
 " CtrlP settings
 let g:ctrlp_match_window = 'bottom,order:ttb'
@@ -129,8 +113,24 @@ let g:netrw_list_hide  = "\.git,\.DS_Store"
 let g:netrw_banner     = 0
 let g:netrw_localrmdir='rm -r'
 
-set formatprg=par\ -w80\ -q
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
 
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
+let g:enable_bold_font = 1
+let g:rehash256 = 1
+let g:airline_theme='jellybeans'
+let g:airline_powerline_fonts = 1
+
+set formatprg=par\ -w80\ -q
 
 " ==========================
 " AUTOCOMMANDS

@@ -37,6 +37,7 @@ Bundle 'tpope/vim-surround'
 Bundle 'vim-scripts/tir_black'
 Bundle 'frankier/neovim-colors-solarized-truecolor-only'
 Bundle 'morhetz/gruvbox'
+Bundle 'yggdroot/indentline'
 
 if needsToInstallBundles == 1
   echo "\nInstalling Bundles, please ignore key map error messages\n"
@@ -110,6 +111,9 @@ tnoremap <Esc> <C-\><C-n>
 
 " neoterm configuration
 let g:neoterm_position = 'vertical'
+
+let g:indentLine_color_term = 1
+let g:indentLine_char = '|'
 
 command! Ttrb :T env PARTIAL=false TRUNCATE=true COUNTRIES=nl bundle exec rails runner t.rb; and time env PARTIAL=true TRUNCATE=false COUNTRIES=de bundle exec rails runner t.rb
 nnoremap <silent> ,th :Ttrb<cr>

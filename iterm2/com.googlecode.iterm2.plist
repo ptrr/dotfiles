@@ -9039,7 +9039,7 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>1206 37 445 77 0 0 2560 1417 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>1240 963 606 456 0 0 2560 1440 </string>
+	<string>1240 940 606 456 0 0 2560 1417 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
 	<string>1080 967 400 129 0 0 2560 1417 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
@@ -9047,7 +9047,7 @@
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>2075 473 592 584 1920 0 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 2560 1440 0 0 2560 1417 </string>
+	<string>0 0 1680 1050 0 0 1680 1027 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -9098,12 +9098,16 @@
 			</dict>
 			<key>Ansi 11 Color</key>
 			<dict>
-				<key>Blue Component</key>
-				<real>0.62745098039215685</real>
-				<key>Green Component</key>
-				<real>0.86274509803921573</real>
-				<key>Red Component</key>
+				<key>Alpha Component</key>
 				<real>1</real>
+				<key>Blue Component</key>
+				<real>0.53540736436843872</real>
+				<key>Color Space</key>
+				<string>Calibrated</string>
+				<key>Green Component</key>
+				<real>0.86039412021636963</real>
+				<key>Red Component</key>
+				<real>0.99706441164016724</real>
 			</dict>
 			<key>Ansi 12 Color</key>
 			<dict>
@@ -9222,13 +9226,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.071722730994224548</real>
+				<real>0.066130585968494415</real>
 				<key>Color Space</key>
 				<string>Calibrated</string>
 				<key>Green Component</key>
-				<real>0.071721501648426056</real>
+				<real>0.06612946093082428</real>
 				<key>Red Component</key>
-				<real>0.071723662316799164</real>
+				<real>0.066131442785263062</real>
 			</dict>
 			<key>Background Image Is Tiled</key>
 			<false/>
@@ -11365,6 +11369,8 @@
 			<string></string>
 		</dict>
 	</array>
+	<key>NoSyncConfirmBeta</key>
+	<true/>
 	<key>NoSyncDoNotWarnBeforeMultilinePaste</key>
 	<true/>
 	<key>NoSyncDoNotWarnBeforeMultilinePaste_selection</key>
@@ -11461,7 +11467,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-05-25T06:04:59Z</date>
+	<date>2016-06-13T18:28:31Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -11520,7 +11526,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>2.9.20160519-nightly</string>
+	<string>3.0.1</string>
 	<key>kCPFavoritesUserDefaultsKey</key>
 	<array>
 		<data>

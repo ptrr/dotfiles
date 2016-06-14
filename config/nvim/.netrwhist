@@ -1,8 +1,4 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
-let g:netrw_dirhist_1='/Users/peterderuijter'
-let g:netrw_dirhist_2='/Users/peterderuijter/.dotfiles/provision'
-let g:netrw_dirhist_3='/Users/peterderuijter/.dotfiles/config'
-let g:netrw_dirhist_4='/Users/peterderuijter/.dotfiles/script'
-let g:netrw_dirhist_5='/Users/peterderuijter'
-let g:netrw_dirhist_6='/Users/peterderuijter/.dotfiles/rc'
+let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_1='/Users/peterderuijter/Projects/nfr'
+let g:netrw_dirhist_2='/Users/peterderuijter/Projects/katsjing'
