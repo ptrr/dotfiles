@@ -1,3 +1,4 @@
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 " This vimrc automatically installs everything it needs.
 " To install, or reinstall, remove ~/.vim directory and open Vim.
 
@@ -24,6 +25,7 @@ call vundle#rc()
 " Do these first, because other plugins depend on them
 Bundle 'gmarik/vundle'
 
+Bundle 'scrooloose/nerdtree'
 Bundle 'ctrlpvim/ctrlp.vim'
 Bundle 'elixir-lang/vim-elixir'
 Bundle 'gkz/vim-ls'
@@ -35,10 +37,13 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-sensible'
 Bundle 'tpope/vim-surround'
 Bundle 'vim-scripts/tir_black'
-Bundle 'nanotech/jellybeans.vim'
-Bundle 'Yggdroot/indentLine'
 Bundle 'vim-airline/vim-airline'
+Bundle 'morhetz/gruvbox'
+Bundle 'reedes/vim-colors-pencil'
+Bundle 'frankier/neovim-colors-solarized-truecolor-only'
 Bundle 'vim-airline/vim-airline-themes'
+Bundle 'ptrr/pastel-cleanser'
+Bundle 'w0ng/vim-hybrid'
 
 if needsToInstallBundles == 1
   echo "\nInstalling Bundles, please ignore key map error messages\n"
@@ -51,9 +56,13 @@ filetype plugin indent on
 " ==========================
 " SETTINGS
 " ==========================
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-colorscheme jellybeans
+colorscheme hybrid
 set background=dark
+
+if has('gui_running')
+  set guifont=PragmataPro\ for\ Powerline:h11
+  set guioptions-=r
+endif
 
 set vb t_vb=               " Turn off beep
 set lazyredraw             " Don't redraw during macro execution
@@ -125,10 +134,12 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
-let g:enable_bold_font = 1
-let g:rehash256 = 1
-let g:airline_theme='jellybeans'
+" Colorthings
+let g:airline_theme = 'hybrid'
 let g:airline_powerline_fonts = 1
+let g:pencil_higher_contrast_ui = 1
+
+let g:solarized_termcolors=256
 
 set formatprg=par\ -w80\ -q
 
@@ -276,3 +287,5 @@ if executable('pt')
   let g:unite_source_grep_encoding = 'utf-8'
 endif
 
+map <Leader>bg :let &background = ( &background == "dark"? "light" : "dark" )<CR>
+map <Leader>cc :colorscheme = (:colorscheme == "gruvbox"? "papercolor" : "gruvbox" )<CR>

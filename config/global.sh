@@ -2,8 +2,8 @@ export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 # Setting the editor of choice
-export EDITOR='mvim'
-export GIT_EDITOR='vim'
+export EDITOR='nvim'
+export GIT_EDITOR='nvim'
 export VISUAL=$EDITOR
 export SVN_EDITOR=$EDITOR
 export BUNDLER_EDITOR=$EDITOR

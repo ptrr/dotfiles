@@ -62,3 +62,7 @@ alias hark='be rake'
 
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+export "PYTHONPATH=$PYTHONPATH:/Users/peterderuijter/Downloads/libsvm-3.21/python"
+
+
+. /Users/peterderuijter/torch/install/bin/torch-activate

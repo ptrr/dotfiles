@@ -6,6 +6,7 @@
 
 # Some basic ignores.
 --ignore-dir=log
+--ignore-dir=deps
 --ignore-dir=tmp
 --ignore-dir=coverage
 
