@@ -44,6 +44,9 @@ Bundle 'frankier/neovim-colors-solarized-truecolor-only'
 Bundle 'vim-airline/vim-airline-themes'
 Bundle 'ptrr/pastel-cleanser'
 Bundle 'w0ng/vim-hybrid'
+Bundle 'vim-scripts/indentpython.vim'
+
+Bundle 'nanotech/jellybeans.vim'
 
 if needsToInstallBundles == 1
   echo "\nInstalling Bundles, please ignore key map error messages\n"
@@ -56,8 +59,10 @@ filetype plugin indent on
 " ==========================
 " SETTINGS
 " ==========================
-colorscheme hybrid
+colorscheme jellybeans
 set background=dark
+highlight Normal ctermbg=none
+highlight NonText ctermbg=none
 
 if has('gui_running')
   set guifont=PragmataPro\ for\ Powerline:h11
@@ -159,6 +164,15 @@ au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
 au BufNewFile,BufRead *.rs set filetype=rust
 au BufNewFile,BufRead *.slim set filetype=slim
 au BufNewFile,BufRead *.coffee set filetype=coffeescript
+
+au BufNewFile,BufRead *.py
+    \ set tabstop=4
+    \ set softtabstop=4
+    \ set shiftwidth=4
+    \ set textwidth=79
+    \ set expandtab
+    \ set autoindent
+    \ set fileformat=unix
 
 " ==========================
 " GENERAL KEY MAPPINGS
