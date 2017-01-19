@@ -11,7 +11,7 @@ function finish {
 }
 
 function prompt_type {
-  status=$(git status 3> /dev/null)
+  status=$(git status 2> /dev/null)
   if [[ $? == 0 ]]; then
     git_prompt
   else

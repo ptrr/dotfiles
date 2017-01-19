@@ -31,7 +31,6 @@ Bundle 'elixir-lang/vim-elixir'
 Bundle 'gkz/vim-ls'
 Bundle 'kassio/neoterm'
 Bundle 'mileszs/ack.vim'
-Bundle 'rust-lang/rust.vim'
 Bundle 'slim-template/vim-slim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-sensible'
@@ -44,9 +43,11 @@ Bundle 'frankier/neovim-colors-solarized-truecolor-only'
 Bundle 'vim-airline/vim-airline-themes'
 Bundle 'ptrr/pastel-cleanser'
 Bundle 'w0ng/vim-hybrid'
-Bundle 'vim-scripts/indentpython.vim'
-
 Bundle 'nanotech/jellybeans.vim'
+Bundle 'rust-lang/rust.vim'
+Bundle 'racer-rust/vim-racer'
+Bundle 'valloric/YouCompleteMe'
+Bundle 'posva/vim-vue'
 
 if needsToInstallBundles == 1
   echo "\nInstalling Bundles, please ignore key map error messages\n"
@@ -140,7 +141,7 @@ if executable('ag')
 endif
 
 " Colorthings
-let g:airline_theme = 'hybrid'
+let g:airline_theme = 'jellybeans'
 let g:airline_powerline_fonts = 1
 let g:pencil_higher_contrast_ui = 1
 
@@ -164,15 +165,6 @@ au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
 au BufNewFile,BufRead *.rs set filetype=rust
 au BufNewFile,BufRead *.slim set filetype=slim
 au BufNewFile,BufRead *.coffee set filetype=coffeescript
-
-au BufNewFile,BufRead *.py
-    \ set tabstop=4
-    \ set softtabstop=4
-    \ set shiftwidth=4
-    \ set textwidth=79
-    \ set expandtab
-    \ set autoindent
-    \ set fileformat=unix
 
 " ==========================
 " GENERAL KEY MAPPINGS
@@ -247,6 +239,8 @@ map <leader>m :vsplit %%
 map <leader>n :split %%
 
 let g:pencil_gutter_color = 1      " 0=mono (def), 1=color
+let g:racer_cmd = "/Users/peterderuijter/.cargo/bin/racer"
+let g:ycm_python_binary_path = 'python'
 
 map <leader>l :set list!<CR>
 map <leader>w :set wrap!<CR>
