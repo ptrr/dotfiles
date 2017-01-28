@@ -1,0 +1,13 @@
+2017-01-23 15:49:25,122 DEBUG    root            Loaded Command Group: ['gcloud', 'docker']
+2017-01-23 15:49:25,123 DEBUG    root            Running gcloud.docker with Namespace(__calliope_internal_deepest_parser=ArgumentParser(prog='gcloud.docker', usage=None, description='Provides the docker CLI access to the Google Container Registry.', version=None, formatter_class=<class 'argparse.HelpFormatter'>, conflict_handler='error', add_help=False), account=None, authority_selector=None, authorization_token_file=None, authorize_only=False, calliope_command=<googlecloudsdk.calliope.backend.Command object at 0x109113650>, command_path=['gcloud', 'docker'], configuration=None, credential_file_override=None, docker_args=['pull', 'gcr.io/noxa-142808/recommender:1f06e83fd5cdd4d54d623abb8a979c938a9754aa'], docker_host=None, document=None, flatten=None, format=None, h=None, help=None, http_timeout=None, log_http=None, project=None, quiet=None, server=['gcr.io', 'us.gcr.io', 'eu.gcr.io', 'asia.gcr.io', 'b.gcr.io', 'bucket.gcr.io', 'appengine.gcr.io', 'gcr.kubernetes.io', 'us-mirror.gcr.io', 'eu-mirror.gcr.io', 'asia-mirror.gcr.io', 'mirror.gcr.io'], trace_email=None, trace_log=None, trace_token=None, user_output_enabled=None, verbosity='warning', version=None).
+2017-01-23 15:49:25,130 INFO     oauth2client.client Refreshing access_token
+2017-01-23 15:49:25,785 DEBUG    root            (gcloud.docker) 
+Traceback (most recent call last):
+  File "/Users/peterderuijter/Downloads/google-cloud-sdk/lib/googlecloudsdk/calliope/cli.py", line 740, in Execute
+    resources = args.calliope_command.Run(cli=self, args=args)
+  File "/Users/peterderuijter/Downloads/google-cloud-sdk/lib/googlecloudsdk/calliope/backend.py", line 1684, in Run
+    resources = command_instance.Run(args)
+  File "/Users/peterderuijter/Downloads/google-cloud-sdk/lib/surface/docker.py", line 135, in Run
+    raise exceptions.ExitCodeNoError(exit_code=result)
+ExitCodeNoError
+2017-01-23 15:49:25,795 DEBUG    root            Metrics reporting process started...

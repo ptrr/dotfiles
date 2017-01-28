@@ -240,7 +240,7 @@ map <leader>n :split %%
 
 let g:pencil_gutter_color = 1      " 0=mono (def), 1=color
 let g:racer_cmd = "/Users/peterderuijter/.cargo/bin/racer"
-let g:ycm_python_binary_path = 'python'
+let g:ycm_python_binary_path = '/usr/local/bin/python'
 
 map <leader>l :set list!<CR>
 map <leader>w :set wrap!<CR>
