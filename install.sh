@@ -15,3 +15,4 @@ mkdir -p "$HOME/.config"
 stow --target "$HOME" --no-folding nvim
 stow --target "$HOME" --no-folding zsh
 stow --target "$HOME" --no-folding git
+stow --target "$HOME" --no-folding kitty
