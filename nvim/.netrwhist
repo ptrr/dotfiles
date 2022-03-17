@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =5
+let g:netrw_dirhist_5='/home/peterderuijter/Code'
+let g:netrw_dirhist_4='/home/peterderuijter'
+let g:netrw_dirhist_3='/home/peterderuijter/Code/dotfiles'
+let g:netrw_dirhist_2='/home/peterderuijter/Code'
+let g:netrw_dirhist_1='/home/peterderuijter'
+let g:netrw_dirhist_0='/home/peterderuijter/Code/ap-templates'
+let g:netrw_dirhist_9='/home/peterderuijter/Code/ap-templates/pandoc'
+let g:netrw_dirhist_8='/home/peterderuijter/Code/ap-templates'
+let g:netrw_dirhist_7='/home/peterderuijter/Code/koffie'
+let g:netrw_dirhist_6='/home/peterderuijter'
