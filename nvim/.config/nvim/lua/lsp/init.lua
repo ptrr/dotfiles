@@ -1,135 +1,48 @@
-local u = require("config.utils")
+require("lsp.ts")
+require("lsp.python")
 
-local lsp = vim.lsp
-local api = vim.api
+-- Mappings.
+-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+local opts = { noremap=true, silent=true }
+vim.api.nvim_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
 
-local border_opts = { border = "single", focusable = false, scope = "line" }
-
-vim.diagnostic.config({ virtual_text = false, float = border_opts })
-
-lsp.handlers["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_help, border_opts)
-lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, border_opts)
-
--- use lsp formatting if it's available (and if it's good)
--- otherwise, fall back to null-ls
-local preferred_formatting_clients = { "denols", "eslint" }
-local fallback_formatting_client = "null-ls"
-
--- prevent repeated lookups
-local buffer_client_ids = {}
-
-_G.formatting = function(bufnr)
-    bufnr = tonumber(bufnr) or api.nvim_get_current_buf()
-
-    local selected_client
-    if buffer_client_ids[bufnr] then
-        selected_client = lsp.get_client_by_id(buffer_client_ids[bufnr])
-    else
-        for _, client in ipairs(lsp.buf_get_clients(bufnr)) do
-            if vim.tbl_contains(preferred_formatting_clients, client.name) then
-                selected_client = client
-                break
-            end
-
-            if client.name == fallback_formatting_client then
-                selected_client = client
-            end
-        end
-    end
-
-    if not selected_client then
-        return
-    end
-
-    buffer_client_ids[bufnr] = selected_client.id
-
-    local params = lsp.util.make_formatting_params()
-    selected_client.request("textDocument/formatting", params, function(err, res)
-        if err then
-            local err_msg = type(err) == "string" and err or err.message
-            vim.notify("global.lsp.formatting: " .. err_msg, vim.log.levels.WARN)
-            return
-        end
-
-        if not api.nvim_buf_is_loaded(bufnr) or api.nvim_buf_get_option(bufnr, "modified") then
-            return
-        end
-
-        if res then
-            lsp.util.apply_text_edits(res, bufnr, selected_client.offset_encoding or "utf-16")
-            api.nvim_buf_call(bufnr, function()
-                vim.cmd("silent noautocmd update")
-            end)
-        end
-    end, bufnr)
-end
-
-
-vim.nvim_add_user_command("EchoHi", 'echo "hi"', {})
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-    -- commands
-     -- u.command("LspFormatting", vim.lsp.buf.formatting)
---    u.command("LspHover", vim.lsp.buf.hover)
---    u.command("LspDiagPrev", vim.diagnostic.goto_prev)
---    u.command("LspDiagNext", vim.diagnostic.goto_next)
---    u.command("LspDiagLine", vim.diagnostic.open_float)
---    u.command("LspDiagQuickfix", vim.diagnostic.setqflist)
---    u.command("LspSignatureHelp", vim.lsp.buf.signature_help)
---    u.command("LspTypeDef", vim.lsp.buf.type_definition)
---    -- not sure why this is necessary?
---    u.command("LspRename", function()
---        vim.lsp.buf.rename()
---    end)
+  -- Enable completion triggered by <c-x><c-o>
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-
-    -- bindings
-    u.buf_map(bufnr, "n", "gi", ":LspRename<CR>")
-    u.buf_map(bufnr, "n", "gy", ":LspTypeDef<CR>")
-    u.buf_map(bufnr, "n", "K", ":LspHover<CR>")
-    u.buf_map(bufnr, "n", "[a", ":LspDiagPrev<CR>")
-    u.buf_map(bufnr, "n", "]a", ":LspDiagNext<CR>")
-    u.buf_map(bufnr, "n", "<Leader>a", ":LspDiagLine<CR>")
-    u.buf_map(bufnr, "n", "<Leader>q", ":LspDiagQuickfix<CR>")
-    u.buf_map(bufnr, "i", "<C-x><C-x>", "<cmd> LspSignatureHelp<CR>")
-
-    u.buf_map(bufnr, "n", "gr", ":LspRef<CR>")
-    u.buf_map(bufnr, "n", "gd", ":LspDef<CR>")
-    u.buf_map(bufnr, "n", "ga", ":LspAct<CR>")
-    u.buf_map(bufnr, "v", "ga", "<Esc><cmd> LspRangeAct<CR>")
-
-    if client.supports_method("textDocument/formatting") then
-        vim.cmd([[
-        augroup LspFormatting
-            autocmd! * <buffer>
-            autocmd BufWritePost <buffer> silent! lua formatting(vim.fn.expand("<abuf>"))
-        augroup END
-        ]])
-    end
-
-    require("illuminate").on_attach(client)
+  -- Mappings.
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
-for _, server in ipairs({
-    "bashls",
-    "denols",
-    "eslint",
-    "jsonls",
-    "null-ls",
-    "sumneko_lua",
-    "tsserver",
-}) do
-    require("lsp." .. server).setup(on_attach, capabilities)
-end
 
--- suppress lspconfig messages
-local notify = vim.notify
-vim.notify = function(msg, ...)
-    if msg:match("%[lspconfig%]") then
-        return
-    end
-
-    notify(msg, ...)
+-- Use a loop to conveniently call 'setup' on multiple servers and
+-- map buffer local keybindings when the language server attaches
+local servers = { 'pyright', 'rust_analyzer', 'tsserver' }
+for _, lsp in pairs(servers) do
+  require('lspconfig')[lsp].setup {
+    on_attach = on_attach,
+    flags = {
+      -- This will be the default in neovim 0.7+
+      debounce_text_changes = 150,
+    }
+  }
 end

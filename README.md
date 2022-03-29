@@ -5,3 +5,5 @@ ripgrep
 starship prompt
 kitty
 zsh
+stow
+
