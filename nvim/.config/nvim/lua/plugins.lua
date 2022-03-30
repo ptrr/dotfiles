@@ -44,6 +44,8 @@ return packer.startup(function()
   },
 }
 use "lewis6991/impatient.nvim"
+use "joshdick/onedark.vim"
+use "cocopon/iceberg.vim"
 use "savq/melange"
 use {'junegunn/fzf', dir =  '~/.fzf', run = './install --all' }
 use 'junegunn/fzf.vim'
