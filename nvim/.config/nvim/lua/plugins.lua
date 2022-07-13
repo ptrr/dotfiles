@@ -44,7 +44,7 @@ return packer.startup(function()
   },
 }
 use "lewis6991/impatient.nvim"
-use "joshdick/onedark.vim"
+use 'navarasu/onedark.nvim'
 use "cocopon/iceberg.vim"
 use "savq/melange"
 use {'junegunn/fzf', dir =  '~/.fzf', run = './install --all' }
@@ -54,6 +54,7 @@ use "b0o/schemastore.nvim"
 use 'jose-elias-alvarez/null-ls.nvim'
 use 'nvim-lua/plenary.nvim'
 use 'jose-elias-alvarez/nvim-lsp-ts-utils'
+use 'folke/tokyonight.nvim'
 
 use 'folke/lua-dev.nvim' -- better sumneko_lua settings
 use { 'RRethy/vim-illuminate',  as = 'illuminate' } -- highlights and allows moving between variable references

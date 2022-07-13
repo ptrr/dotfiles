@@ -51,8 +51,6 @@ alias gs='git status --short'
 alias ap='git add -p'
 alias mdg='mix deps-get'
 
-
-
 SSH_ENV=$HOME/.ssh/environment
 # start the ssh-agent
 function start_agent {
@@ -71,25 +69,57 @@ if [ -f "${SSH_ENV}" ]; then
 else
   start_agent;
 fi
+
+# NodeJS stuff
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+# Python Stuff
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+
+export PATH="$HOME/.poetry/bin:$PATH"
+# if command -v pyenv 1>/dev/null 2>&1; then
+#   eval "$(pyenv init -)"
+# fi
+# eval "$(pyenv init --path)"
+
+# Rust Stuff
 export PATH="$HOME/.cargo/bin:$PATH"
 
+# Search Stuff
 export FZF_DEFAULT_COMMAND='rg --files --hidden'
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 [ -f ~/.fzf/shell/key-bindings.zsh ] && source "$HOME/.fzf/shell/key-bindings.zsh"
 [ -f ~/.fzf/shell/completion.zsh ] && source  "$HOME/.fzf/shell/completion.zsh"
 
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-
-if command -v pyenv 1>/dev/null 2>&1; then
-eval "$(pyenv init -)"
-fi
-eval "$(pyenv init --path)"
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Start Prompt
 eval "$(starship init zsh)"
 
-export PATH="$HOME/.poetry/bin:$PATH"
+export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/peterderuijter/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/peterderuijter/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/peterderuijter/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/peterderuijter/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+# eval "$(pyenv virtualenv-init -)"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/homebrew/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh" ]; then
+        . "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/homebrew/Caskroom/miniconda/base/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
